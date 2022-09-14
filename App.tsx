@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {TailwindProvider} from 'tailwind-rn';
 import utilities from './tailwind.json';
-import CustomerScreen from './screens/CustomerScreen';
 import { NavigationContainer } from '@react-navigation/native';
+import RootNavigation from './navigation/RootNavigation';
 
 export default function App() {
   return (
@@ -12,8 +12,7 @@ export default function App() {
 
     <TailwindProvider utilities={utilities}>
       <NavigationContainer>
-
-        <CustomerScreen />
+        <RootNavigation />
       </NavigationContainer>
     </TailwindProvider>
   );
