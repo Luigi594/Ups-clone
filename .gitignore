@@ -8,8 +8,11 @@ npm-debug.*
 *.key
 *.mobileprovision
 *.orig.*
+.env
+typings.d.ts
 web-build/
 stepzen/
+graphql/queries.ts
 
 # macOS
 .DS_Store
