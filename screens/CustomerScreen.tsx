@@ -7,6 +7,9 @@ import { TabStackParamList } from '../navigation/TabNavigator';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/RootNavigation';
 import { Image, Input } from '@rneui/themed';
+import { useQuery } from '@apollo/client';
+import { GET_CUSTOMERS } from '../graphql/queries';
+import CustomerCard from '../components/CustomerCard';
 
 /** Composite navigation prop, this combine the navigation,
  * here we give the correct types definitions. We have nested
@@ -25,6 +28,7 @@ const CustomerScreen = () => {
   const tailwind = useTailwind();  
   const navigation = useNavigation<CustomerScreenNavigationProp>();
   const [input, setInput] = useState<string>('');
+  const { loading, error, data } = useQuery(GET_CUSTOMERS);
 
   useLayoutEffect(() => {
 
@@ -50,6 +54,25 @@ const CustomerScreen = () => {
         onChangeText={setInput}
         containerStyle={tailwind('bg-white pt-5 pb-0 px-10')}
       />
+
+      {/** this code in addition to render the card for all customer
+       * you can filter the customer with the filter function, we use the
+       * type CustomerList where we have all of them and we pass the
+       * includes with the input when we type on the field above
+       */}
+      {data?.getCustomers?.filter((customer: CustomerList) => 
+      customer.value.name.includes(input))
+      .map(({ name: ID, value: { email, name } }: CustomerResponse ) => (
+
+        <CustomerCard
+        
+          key={ID}
+          email={email}
+          name={name}
+          userId={ID}
+        />
+      ))}
+      
     </ScrollView>
   )
 }
