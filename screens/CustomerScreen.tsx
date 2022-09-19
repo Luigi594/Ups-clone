@@ -1,12 +1,12 @@
 import React, { useLayoutEffect, useState } from 'react'
-import { ScrollView, ActivityIndicator } from 'react-native'
+import { ScrollView, ActivityIndicator, Text } from 'react-native'
 import { useTailwind } from 'tailwind-rn';
 import { CompositeNavigationProp, useNavigation } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { TabStackParamList } from '../navigation/TabNavigator';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/RootNavigation';
-import { Image, Input } from '@rneui/themed';
+import { Divider, Image, Input } from '@rneui/themed';
 import { useQuery } from '@apollo/client';
 import { GET_CUSTOMERS } from '../graphql/queries';
 import CustomerCard from '../components/CustomerCard';
@@ -39,7 +39,7 @@ const CustomerScreen = () => {
   }, [])
   
   return (
-    <ScrollView style={{ backgroundColor: '#59C1CC'}}>
+    <ScrollView style={{ backgroundColor: '#59C1CC' }}>
       <Image 
         source={{
           uri: 'https://links.papareact.com/3jc'
@@ -60,19 +60,17 @@ const CustomerScreen = () => {
        * type CustomerList where we have all of them and we pass the
        * includes with the input when we type on the field above
        */}
-      {data?.getCustomers?.filter((customer: CustomerList) => 
-      customer.value.name.includes(input))
-      .map(({ name: ID, value: { email, name } }: CustomerResponse ) => (
 
-        <CustomerCard
-        
-          key={ID}
-          email={email}
-          name={name}
-          userId={ID}
-        />
-      ))}
+      {loading ? <ActivityIndicator /> : (
       
+        data?.getCustomers
+          ?.filter((customer: CustomerList) => customer.value.name.includes(input))
+          .map(({ name: ID, value: { email, name } }: CustomerResponse) => (
+
+            <CustomerCard key={ID} name={name} email={email} userId={ID} />
+          ))
+      )}
+
     </ScrollView>
   )
 }

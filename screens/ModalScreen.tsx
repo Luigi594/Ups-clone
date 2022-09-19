@@ -10,7 +10,7 @@ import { RootStackParamList } from '../navigation/RootNavigation'
 import useCustomerOrders from '../hooks/useCustomerOrders'
 import DeliveryCard from '../components/DeliveryCard'
 
-export type ModalScreenNavigationProp = CompositeNavigationProp<
+type ModalScreenNavigationProp = CompositeNavigationProp<
 
     BottomTabNavigationProp<TabStackParamList>,
     NativeStackNavigationProp<RootStackParamList, 'MyModal'>
@@ -28,10 +28,10 @@ const ModalScreen = () => {
   const { loading, error, orders } = useCustomerOrders(userId);
 
   return (
-    <View>
+    <View style={{ paddingTop: 10 }}>
       <TouchableOpacity 
         onPress={navigation.goBack}
-        style={tailwind('absolute right-5 top-5 z-10')}>
+        style={tailwind('absolute right-5 top-12 z-10')}>
         <Icon name="closecircle" type='antdesign' />
       </TouchableOpacity>
 

@@ -12,9 +12,10 @@ const client = new ApolloClient({
 
   uri: URI ,
   cache: new InMemoryCache(),
+  credentials: 'include'
 });
 
-export default function App() {
+export default function App() {  
   return (
 
     // @ts-ignore - TailwindProvider is missing a type definition

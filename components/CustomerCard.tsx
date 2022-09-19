@@ -26,7 +26,7 @@ const CustomerCard = ({ userId, name, email }: Props) => {
             <View style={tailwind('flex-row justify-between')}>
                 <View>
                     <Text style={tailwind('text-2xl font-bold')}>{ name }</Text>
-                    <Text style={tailwind('text-sm text-["#59C1CC"]')}>ID: { userId }</Text>
+                    <Text style={tailwind('text-sm text-[#59C1CC]')}>ID: { userId }</Text>
                 </View>
 
                 <View style={tailwind('flex-row items-center justify-end')}>
