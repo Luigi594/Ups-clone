@@ -4,6 +4,7 @@ import CustomerScreen from '../screens/CustomerScreen';
 import OrdersScreen from '../screens/OrdersScreen';
 import { useNavigation } from '@react-navigation/native';
 import { Icon } from "@rneui/themed";
+import { Text } from 'react-native';
 
 export type TabStackParamList = {
 
@@ -43,7 +44,14 @@ const TabNavigator = () => {
     })}>
 
       <Tab.Screen name='Customers' component={CustomerScreen} />
-      <Tab.Screen name='Orders' component={OrdersScreen} />
+      <Tab.Screen options={{
+
+        headerShown: false,
+        tabBarLabel: ({ focused, color }) => (
+          <Text style={{ color: focused ? "#EB6A7C" : color, fontSize: 10 }}>Orders</Text>
+        )
+
+      }} name='Orders' component={OrdersScreen} />
     </Tab.Navigator>
   )
 }
