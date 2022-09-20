@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react'
-import { ScrollView, ActivityIndicator, Text } from 'react-native'
+import { ScrollView, ActivityIndicator, Text, View } from 'react-native'
 import { useTailwind } from 'tailwind-rn';
 import { CompositeNavigationProp, useNavigation } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
@@ -40,36 +40,39 @@ const CustomerScreen = () => {
   
   return (
     <ScrollView style={{ backgroundColor: '#59C1CC' }}>
-      <Image 
-        source={{
-          uri: 'https://links.papareact.com/3jc'
-        }}
 
-        containerStyle={tailwind('w-full h-64')}
-        PlaceholderContent={<ActivityIndicator />}
-      />
+      <View style={{ paddingBottom: 100 }}>
+        <Image 
+          source={{
+            uri: 'https://links.papareact.com/3jc'
+          }}
 
-      <Input placeholder='Search by Customer'
-        value={input}
-        onChangeText={setInput}
-        containerStyle={tailwind('bg-white pt-5 pb-0 px-10')}
-      />
+          containerStyle={tailwind('w-full h-64')}
+          PlaceholderContent={<ActivityIndicator />}
+        />
 
-      {/** this code in addition to render the card for all customer
-       * you can filter the customer with the filter function, we use the
-       * type CustomerList where we have all of them and we pass the
-       * includes with the input when we type on the field above
-       */}
+        <Input placeholder='Search by Customer'
+          value={input}
+          onChangeText={setInput}
+          containerStyle={tailwind('bg-white pt-5 pb-0 px-10')}
+        />
 
-      {loading ? <ActivityIndicator /> : (
-      
-        data?.getCustomers
-          ?.filter((customer: CustomerList) => customer.value.name.includes(input))
-          .map(({ name: ID, value: { email, name } }: CustomerResponse) => (
+        {/** this code in addition to render the card for all customer
+         * you can filter the customer with the filter function, we use the
+         * type CustomerList where we have all of them and we pass the
+         * includes with the input when we type on the field above
+         */}
 
-            <CustomerCard key={ID} name={name} email={email} userId={ID} />
-          ))
-      )}
+        {loading ? <ActivityIndicator /> : (
+        
+          data?.getCustomers
+            ?.filter((customer: CustomerList) => customer.value.name.includes(input))
+            .map(({ name: ID, value: { email, name } }: CustomerResponse) => (
+
+              <CustomerCard key={ID} name={name} email={email} userId={ID} />
+            ))
+        )}
+      </View>
 
     </ScrollView>
   )

@@ -17,8 +17,6 @@ export type OrderScreenNavigationProp = CompositeNavigationProp<
   
 >
 
-// type OrderScreenRouteProp = RouteProp<RootStackParamList, 'Order'>;
-
 const OrdersScreen = () => {
 
   const tailwind = useTailwind();
@@ -35,12 +33,12 @@ const OrdersScreen = () => {
         PlaceholderContent={ <ActivityIndicator />}
       />
 
-      <View>
+      <View style={{ paddingBottom: 100 }}>
         <Button
 
           color={'pink'}
           titleStyle={{ color: 'gray', fontWeight: '400' }}
-          style={tailwind('py-2 px-5')}
+          containerStyle={tailwind('py-2 px-5')}
           onPress={() => setAscending(!ascending)}
         >
           {ascending ? "Showing: Oldest First" : "Showing: Most Recent First"}

@@ -17,12 +17,15 @@ type ModalScreenNavigationProp = CompositeNavigationProp<
 
 >
 
+/** this is the way we can have access to the parameters we sent in CustomerCard component */
 type ModalScreenRouteProps = RouteProp<RootStackParamList, 'MyModal'>
 
 const ModalScreen = () => {
 
   const tailwind = useTailwind();  
   const navigation = useNavigation<ModalScreenNavigationProp>();
+
+  // now we can destruct the object to get the route values
   const { params: { name, userId } } = useRoute<ModalScreenRouteProps>()
   
   const { loading, error, orders } = useCustomerOrders(userId);
@@ -32,6 +35,7 @@ const ModalScreen = () => {
       <TouchableOpacity 
         onPress={navigation.goBack}
         style={tailwind('absolute right-5 top-12 z-10')}>
+          
         <Icon name="closecircle" type='antdesign' />
       </TouchableOpacity>
 
